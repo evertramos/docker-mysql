@@ -1,0 +1,22 @@
+name: ${EZY_MYSQL_PROJECT_NAME:-docker-mysql}
+
+services:
+  mysql:
+    image: mysql/mysql-server:${EZY_MYSQL_VERSION:-latest}
+    container_name: ${EZY_MYSQL_CONTAINER_NAME:-mysql}
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: ${EZY_MYSQL_CPU_LIMIT:-1}
+          memory: ${EZY_MYSQL_MEMORY_LIMIT:-2GB}
+    ports:
+      - ${EZY_MYSQL_PORT-3306}:3306
+    volumes:
+      - ./data:/var/lib/mysql
+    logging:
+      driver: json-file
+      options:
+        max-size: ${EZY_MYSQl_LOG_MAXSIZE:-1m}
+        max-file: ${EZY_MYSQl_LOG_MAXFILE:-50}
+
