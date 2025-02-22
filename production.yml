@@ -1,0 +1,14 @@
+
+services:
+  mysql:
+    deploy:
+      resources:
+        limits:
+          cpus: ${EZY_MYSQL_CPU_LIMIT:-1}
+          memory: ${EZY_MYSQL_MEMORY_LIMIT:-2GB}
+    logging:
+      driver: json-file
+      options:
+        max-size: ${EZY_MYSQl_LOG_MAXSIZE:-1m}
+        max-file: ${EZY_MYSQl_LOG_MAXFILE:-50}
+
